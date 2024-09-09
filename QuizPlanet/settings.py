@@ -24,12 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECREAT_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG","False").lower() =="True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTs").split(" ")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
+
 
 
 # Application definition
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'QuizPlanet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['BASE_DIR','templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +76,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'QuizPlanet.wsgi.application'
 
@@ -139,7 +142,7 @@ STATIC_URL = 'static/' #url
 import os
 STATIC_ROOT= BASE_DIR / 'staticfiles' #production
 STATICFILES_DIRS =[
-    BASE_DIR / 'static' #folder location
+    BASE_DIR / 'static',
 ]
 
 MEDIA_URL='media/'
