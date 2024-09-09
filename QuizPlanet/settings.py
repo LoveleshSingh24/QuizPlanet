@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'base',
     'quiz',
     'ckeditor',
+    'dj_database_url'
 ]
 
 MIDDLEWARE = [
@@ -87,19 +88,21 @@ WSGI_APPLICATION = 'QuizPlanet.wsgi.application'
 
 
 database_url = os.environ.get("DATABASE_URL")
-if database_url:
-    DATABASES=['default'] = dj_database_url.parse(database_url)
-else:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quizplanet_django',
-        'USER':'root',
-        'PASSWORD':'Lovelesh@2003',
-        'HOST':'127.0.0.1',
-        'PORT':'3306'
-    }
+DATABASES = {
+    'default': dj_database_url.parse(database_url)
 }
+
+# else:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'quizplanet_django',
+#         'USER':'root',
+#         'PASSWORD':'Lovelesh@2003',
+#         'HOST':'127.0.0.1',
+#         'PORT':'3306'
+#     }
+# }
 #step 2
 #override the above database with postgress database by external database url (1 Gb)
 
