@@ -84,7 +84,13 @@ WSGI_APPLICATION = 'QuizPlanet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+
+
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    DATABASES=['default'] = dj_database_url.parse(database_url)
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'quizplanet_django',
@@ -94,11 +100,9 @@ DATABASES = {
         'PORT':'3306'
     }
 }
-
-database_url = os.environ.get("DATABASE_URL")
 #step 2
 #override the above database with postgress database by external database url (1 Gb)
-DATABASES ['default'] = dj_database_url.parse(database_url)
+
 
 #step 3 install the posgress dirver to migrate the table scheme
 #in cmd "pip install psycopg2-binary" and run "python manage.py migrate" to migrate table inside the postgress database
