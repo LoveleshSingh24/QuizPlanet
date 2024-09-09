@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 #step 1
 #postgress data base url by cmd command "pip install dj-database-url"
 import dj_database_url
@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-u%4t8)355hn8*zp@^ezv7+p2wdzwr-p)w_m0*%bmn90*_9+!3t'
+SECRET_KEY = os.environ.get("SECREAT_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG","False").lower() =="True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTs").split(" ")
 
 
 # Application definition
@@ -91,16 +91,14 @@ DATABASES = {
         'PORT':'3306'
     }
 }
+
+database_url = os.environ.get("DATABASE_URL")
 #step 2
 #override the above database with postgress database by external database url (1 Gb)
-DATABASES ['default'] = dj_database_url.parse("postgresql://testdb_mu2a_user:he1fhnzY3RHUFaUN8mIcd5Z6pptZuOoL@dpg-crfag6bgbbvc73c1e2ag-a.oregon-postgres.render.com/testdb_mu2a")
+DATABASES ['default'] = dj_database_url.parse(database_url)
 
 #step 3 install the posgress dirver to migrate the table scheme
 #in cmd "pip install psycopg2-binary" and run "python manage.py migrate" to migrate table inside the postgress database
-#username : testdb_mu2a_user
-#password : he1fhnzY3RHUFaUN8mIcd5Z6pptZuOoL
-#host : dpg-crfag6bgbbvc73c1e2ag-a.oregon-postgres.render.com
-#database : testdb_mu2a
 
 
 # Password validation

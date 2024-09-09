@@ -7,3 +7,5 @@ db.sqlite3
 
 /quiz/__pycache__
 /quiz/migrations/__pycache__
+
+DB_credential.txt
