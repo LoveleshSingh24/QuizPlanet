@@ -31,9 +31,6 @@ twitter.common.lang==0.3.11
 typing_extensions==4.8.0
 tzdata==2023.3
 urllib3==2.0.7
-vboxapi==1.0
-vboxapi==1.0
-vboxapi==1.0
 virtualenv==20.24.6
 waitress==3.0.0
 WebOb==1.8.8
