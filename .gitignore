@@ -9,3 +9,7 @@ db.sqlite3
 /quiz/migrations/__pycache__
 
 DB_credential.txt
+
+/QuizPlanet/__pycache__
+
+.env

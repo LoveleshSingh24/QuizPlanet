@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+from decouple import config 
 #step 1
 #postgress data base url by cmd command "pip install dj-database-url"
 import dj_database_url
@@ -24,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","False").lower() =="True"
+DEBUG = config("DEBUG",cast=bool)
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
 
 
@@ -84,14 +84,24 @@ WSGI_APPLICATION = 'QuizPlanet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-
-
-database_url = os.environ.get("DATABASE_URL")
 DATABASES = {
-    'default': dj_database_url.parse(database_url)
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quizplanet_django',
+        'USER':'root',
+        'PASSWORD':'Lovelesh@2003',
+        'HOST':'127.0.0.1',
+        'PORT':'3306'
+    }
 }
 
+
+# database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
+
+    
+    
+    
 # else:
 #     DATABASES = {
 #     'default': {
