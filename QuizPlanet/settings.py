@@ -163,7 +163,7 @@ STATICFILES_DIRS =[
 ]
 
 MEDIA_URL='/media/'
-MEDIA_ROOT ='/media/'
+MEDIA_ROOT = BASE_DIR/ 'media'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 # Default primary key field type
